@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 import { ExerciseViewComponent } from './exerciseView.component';
+import { PlanViewComponent } from './planView.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,9 @@ import { ExerciseViewComponent } from './exerciseView.component';
   ],
   declarations: [
     AppComponent,
-    ExerciseViewComponent
+    ExerciseViewComponent,
+    PlanViewComponent
+
   ],
   bootstrap: [ AppComponent ]
 })

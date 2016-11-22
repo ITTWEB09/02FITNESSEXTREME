@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var CreateComponent = (function () {
     function CreateComponent() {
     }
-    CreateComponent = __decorate([
-        core_1.Component({
-            selector: 'create',
-            template: "\n    <h1>Fitness planning!</h1>\n    <input></input>\n    <ex-view [plan]=\"selectedPlan\"></ex-view>\n    "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], CreateComponent);
     return CreateComponent;
 }());
+CreateComponent = __decorate([
+    core_1.Component({
+        selector: 'create',
+        template: "\n    <h1>Fitness planning!</h1>\n    <input></input>\n    <ex-view [plan]=\"selectedPlan\"></ex-view>\n    "
+    }),
+    __metadata("design:paramtypes", [])
+], CreateComponent);
 exports.CreateComponent = CreateComponent;
 //# sourceMappingURL=create.component.js.map

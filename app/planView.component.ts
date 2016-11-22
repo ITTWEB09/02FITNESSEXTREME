@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Exercise } from './exercise';
 
 @Component({
-    selector: 'my-app',
+    selector: 'planView',
     template: `
     <h1>Fitness planning!</h1>
     <select [(ngModel)]="selected1">
@@ -17,7 +17,7 @@ import { Exercise } from './exercise';
     <ex-view></ex-view>
     `
 })
-export class AppComponent {
+export class PlanViewComponent {
   public selectedPlan: [Exercise] = [
     { name: "Test1", desc: "Test1", reps: 5, sets:5 },
     { name: "Test2", desc: "Test2", reps: 5, sets:5 }
