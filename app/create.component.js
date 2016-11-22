@@ -11,7 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var CreateComponent = (function () {
     function CreateComponent() {
+        this.selectedPlan = [
+            { name: "Test1", desc: "Test1", reps: 5, sets: 5 },
+            { name: "Test2", desc: "Test2", reps: 5, sets: 5 }
+        ];
     }
+<<<<<<< HEAD
+=======
+    CreateComponent = __decorate([
+        core_1.Component({
+            selector: 'create',
+            template: "\n    <ex-view [plan]=\"selectedPlan\"></ex-view>\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CreateComponent);
+>>>>>>> 26952ded40bef799d6c90e6c2ee713a540947bdd
     return CreateComponent;
 }());
 CreateComponent = __decorate([
