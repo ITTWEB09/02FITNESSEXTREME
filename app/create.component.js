@@ -9,21 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ExerciseViewComponent = (function () {
-    function ExerciseViewComponent() {
+var CreateComponent = (function () {
+    function CreateComponent() {
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], ExerciseViewComponent.prototype, "plan", void 0);
-    ExerciseViewComponent = __decorate([
+    CreateComponent = __decorate([
         core_1.Component({
-            selector: 'ex-view',
-            template: "\n        Test!\n    "
+            selector: 'create',
+            template: "\n    <h1>Fitness planning!</h1>\n    <input></input>\n    <ex-view [plan]=\"selectedPlan\"></ex-view>\n    "
         }), 
         __metadata('design:paramtypes', [])
-    ], ExerciseViewComponent);
-    return ExerciseViewComponent;
+    ], CreateComponent);
+    return CreateComponent;
 }());
-exports.ExerciseViewComponent = ExerciseViewComponent;
-//# sourceMappingURL=exerciseView.component.js.map
+exports.CreateComponent = CreateComponent;
+//# sourceMappingURL=create.component.js.map

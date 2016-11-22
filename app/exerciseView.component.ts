@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Exercise } from './exercise';
 
 @Component({
     selector: 'ex-view',
@@ -7,5 +8,6 @@ import {Component} from '@angular/core';
     `
 })
 export class ExerciseViewComponent {
-
+    @Input()
+    plan: [Exercise]
 }
