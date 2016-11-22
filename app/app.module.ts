@@ -5,16 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent }  from './app.component';
 import { ExerciseViewComponent } from './exerciseView.component';
-<<<<<<< HEAD
 import { PlanViewComponent } from './planView.component';
-=======
 import { CreateComponent } from './create.component';
 
 const appRoutes: Routes = [
   { path: 'create', component: CreateComponent },
   { path: '', component: PlanViewComponent }
 ]
->>>>>>> 26952ded40bef799d6c90e6c2ee713a540947bdd
 
 @NgModule({
   imports: [
@@ -24,14 +21,10 @@ const appRoutes: Routes = [
   ],
   declarations: [
     AppComponent,
-<<<<<<< HEAD
     ExerciseViewComponent,
-    PlanViewComponent
-
-=======
+    PlanViewComponent,
     CreateComponent,
     ExerciseViewComponent
->>>>>>> 26952ded40bef799d6c90e6c2ee713a540947bdd
   ],
   bootstrap: [ AppComponent ]
 })
