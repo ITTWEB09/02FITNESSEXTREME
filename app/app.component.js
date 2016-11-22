@@ -11,11 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var AppComponent = (function () {
     function AppComponent() {
+        this.selectedPlan = [
+            { name: "Test1", desc: "Test1", reps: 5, sets: 5 },
+            { name: "Test2", desc: "Test2", reps: 5, sets: 5 }
+        ];
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <h1>Fitness planning!</h1>\n    <input></input>\n    <ex-view [plan]=\"selectedPlan\"></ex-view>\n    "
+            template: "\n    <h1>Fitness planning!</h1>\n    <ex-view></ex-view>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

@@ -12,14 +12,11 @@ var core_1 = require('@angular/core');
 var ExerciseViewComponent = (function () {
     function ExerciseViewComponent() {
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], ExerciseViewComponent.prototype, "plan", void 0);
     ExerciseViewComponent = __decorate([
         core_1.Component({
             selector: 'ex-view',
-            template: "\n        Test!\n    "
+            template: "\n        Test!\n    ",
+            inputs: ['plan']
         }), 
         __metadata('design:paramtypes', [])
     ], ExerciseViewComponent);

@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Exercise } from './exercise';
 
 @Component({
     selector: 'ex-view',
     template: `
         Test!
-    `
+    `,
+    inputs: ['plan']
 })
 export class ExerciseViewComponent {
-    @Input()
-    plan: [Exercise]
+    public plan: [Exercise];
 }
