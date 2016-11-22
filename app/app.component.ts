@@ -5,12 +5,15 @@ import { Exercise } from './exercise';
     selector: 'my-app',
     template: `
     <h1>Fitness planning!</h1>
-    <ex-view></ex-view>
+    <header>
+      <nav>
+        <a routerLink="/" routerLinkActive="active">View plans</a>
+        <a routerLink="/create" routerLinkActive="active">Create plan</a>
+        <a routerLink="/logout" routerLinkActive="active">Logout</a>
+      </nav>
+    </header>
+    <router-outlet></router-outlet>
     `
 })
 export class AppComponent {
-  public selectedPlan: [Exercise] = [
-    { name: "Test1", desc: "Test1", reps: 5, sets:5 },
-    { name: "Test2", desc: "Test2", reps: 5, sets:5 }
-  ]
 }

@@ -12,11 +12,14 @@ var core_1 = require('@angular/core');
 var ExerciseViewComponent = (function () {
     function ExerciseViewComponent() {
     }
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], ExerciseViewComponent.prototype, "plan", void 0);
     ExerciseViewComponent = __decorate([
         core_1.Component({
             selector: 'ex-view',
-            template: "\n        Test!\n    ",
-            inputs: ['plan']
+            template: "\n        <table>\n            <tr>\n                <th>Name</th>\n                <th>Description</th>\n                <th>Reps</th>\n                <th>Sets</th>\n            </tr>\n            <tr *ngFor=\"let exercise of plan\">\n                <td>{{exercise.name}}</td>\n                <td>{{exercise.desc}}</td>\n                <td>{{exercise.reps}}</td>\n                <td>{{exercise.sets}}</td>\n            </tr>\n        </table>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], ExerciseViewComponent);
