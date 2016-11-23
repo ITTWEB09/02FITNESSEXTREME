@@ -8,6 +8,8 @@ import { ExerciseViewComponent } from './exerciseView.component';
 import { PlanViewComponent } from './planView.component';
 import { CreateComponent } from './create.component';
 
+import { HttpModule }    from '@angular/http';
+
 const appRoutes: Routes = [
   { path: 'create', component: CreateComponent },
   { path: '', component: PlanViewComponent }
@@ -17,7 +19,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpModule
   ],
   declarations: [
     AppComponent,

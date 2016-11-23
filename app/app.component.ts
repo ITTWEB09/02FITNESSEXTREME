@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Exercise } from './exercise';
-import {HttpService} from './http.service'
+import { HttpService } from './http.service';
 
 @Component({
     selector: 'my-app',
@@ -27,6 +27,6 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.getPlans();
+    //this.getPlans();
   }
 }
