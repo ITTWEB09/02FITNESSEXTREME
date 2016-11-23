@@ -8,12 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var ExerciseViewComponent = (function () {
     function ExerciseViewComponent() {
     }
-<<<<<<< HEAD
-=======
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
@@ -21,20 +19,12 @@ var ExerciseViewComponent = (function () {
     ExerciseViewComponent = __decorate([
         core_1.Component({
             selector: 'ex-view',
-            template: "\n        <table>\n            <tr>\n                <th>Name</th>\n                <th>Description</th>\n                <th>Reps</th>\n                <th>Sets</th>\n            </tr>\n            <tr *ngFor=\"let exercise of plan\">\n                <td>{{exercise.name}}</td>\n                <td>{{exercise.desc}}</td>\n                <td>{{exercise.reps}}</td>\n                <td>{{exercise.sets}}</td>\n            </tr>\n        </table>\n    "
+            template: "\n        <table>\n            <tr>\n                <th>Name</th>\n                <th>Description</th>\n                <th>Reps</th>\n                <th>Sets</th>\n            </tr>\n            <tr *ngFor=\"let exercise of plan\">\n                <td>{{exercise.name}}</td>\n                <td>{{exercise.desc}}</td>\n                <td>{{exercise.reps}}</td>\n                <td>{{exercise.sets}}</td>\n            </tr>\n        </table>\n    ",
+            styles: ["\n    table {\n      width: 100%;\n    }\n\n    td {\n        text-align: center;\n    }\n    "]
         }), 
         __metadata('design:paramtypes', [])
     ], ExerciseViewComponent);
->>>>>>> 26952ded40bef799d6c90e6c2ee713a540947bdd
     return ExerciseViewComponent;
 }());
-ExerciseViewComponent = __decorate([
-    core_1.Component({
-        selector: 'ex-view',
-        template: "\n        Test!\n    ",
-        inputs: ['plan']
-    }),
-    __metadata("design:paramtypes", [])
-], ExerciseViewComponent);
 exports.ExerciseViewComponent = ExerciseViewComponent;
 //# sourceMappingURL=exerciseView.component.js.map
