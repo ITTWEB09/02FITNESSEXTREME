@@ -18,7 +18,16 @@ import { Exercise } from './exercise';
                 <td>{{exercise.sets}}</td>
             </tr>
         </table>
-    `
+    `,
+    styles: [`
+    table {
+      width: 100%;
+    }
+
+    td {
+        text-align: center;
+    }
+    `]
 })
 export class ExerciseViewComponent {
     @Input() plan: [Exercise];
