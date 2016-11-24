@@ -1,12 +1,8 @@
 {
   "name": "extreme-fitness-server",
   "version": "1.0.0",
-  "main": "server.js",
   "scripts": {
-    "start": "npm run build:live",
-    "build:live": "nodemon --exec ts-node server.js",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w"
+    "start": "nodemon -e ts --exec \"buildandrun.bat\""
   },
   "dependencies": {
     "body-parser": "^1.15.2",

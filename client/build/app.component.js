@@ -24,7 +24,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <h1>Fitness planning!</h1>\n    <header>\n      <nav>\n        <a routerLink=\"/\" routerLinkActive=\"active\">View plans</a>\n        <a routerLink=\"/create\" routerLinkActive=\"active\">Create plan</a>\n        <a routerLink=\"/logout\" routerLinkActive=\"active\">Logout</a>\n      </nav>\n    </header>\n    <router-outlet></router-outlet>\n    ",
+            template: "\n    <h1>Fitness planning!</h1>\n    <header>\n      <nav>\n        <a routerLink=\"/\" routerLinkActive=\"active\">View plan</a>\n        <a routerLink=\"/create\" routerLinkActive=\"active\">Create plan</a>\n        <a routerLink=\"/logout\" routerLinkActive=\"active\">Logout</a>\n      </nav>\n    </header>\n    <router-outlet></router-outlet>\n    ",
             providers: [http_service_1.HttpService]
         }), 
         __metadata('design:paramtypes', [http_service_1.HttpService])

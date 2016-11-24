@@ -8,10 +8,10 @@
     "experimentalDecorators": true,
     "outDir": "build",
     "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "watch": false
   },
   "exclude": [
-    "node_modules",
-    "client"
+    "node_modules"
   ]
 }
