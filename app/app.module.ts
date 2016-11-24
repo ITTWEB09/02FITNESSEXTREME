@@ -2,13 +2,13 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpModule }    from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import { ExerciseViewComponent } from './exerciseView.component';
 import { PlanViewComponent } from './planView.component';
 import { CreateComponent } from './create.component';
-
-import { HttpModule }    from '@angular/http';
+import { LoginComponent } from './login.component';
 
 const appRoutes: Routes = [
   { path: 'create', component: CreateComponent },
@@ -21,15 +21,15 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
     ExerciseViewComponent,
     PlanViewComponent,
     CreateComponent,
-    ExerciseViewComponent
+    ExerciseViewComponent,
+    LoginComponent
   ],
   bootstrap: [ AppComponent ]
 })
