@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Exercise } from './exercise';
-import {HttpService} from './http.service'
+import { HttpService } from './http.service';
 
 @Component({
     selector: 'my-app',
@@ -8,7 +8,7 @@ import {HttpService} from './http.service'
     <h1>Fitness planning!</h1>
     <header>
       <nav>
-        <a routerLink="/" routerLinkActive="active">View plan</a>
+        <a routerLink="/" routerLinkActive="active">View plans</a>
         <a routerLink="/create" routerLinkActive="active">Create plan</a>
         <a routerLink="/logout" routerLinkActive="active">Logout</a>
       </nav>
@@ -18,7 +18,7 @@ import {HttpService} from './http.service'
     providers: [HttpService]
 })
 export class AppComponent {
-  plans: string[];
+  plans: Exercise[];
   
   constructor(private httpService: HttpService) {}
 
@@ -27,6 +27,6 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.getPlans();
+    //this.getPlans();
   }
 }
