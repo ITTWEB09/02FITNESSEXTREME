@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Exercise } from './exercise';
 import { FormBuilder, Validators } from '@angular/forms';
+
+import { Exercise } from './exercise';
+import { HttpService } from './http.service'
 
 @Component({
     selector: 'create',
@@ -72,7 +74,8 @@ import { FormBuilder, Validators } from '@angular/forms';
     input.ng-invalid, textarea.ng-invalid {
       border: 1px solid red;
     }
-    `]
+    `],
+    providers: [HttpService]
 })
 export class CreateComponent {
   private _selectedPlan: Exercise[] = [];
@@ -84,7 +87,7 @@ export class CreateComponent {
     sets: ['', Validators.required]
   });
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder, private _httpService: HttpService) {}
 
   addExercise() {
     console.log("Adding exercise to plan!");
@@ -93,6 +96,8 @@ export class CreateComponent {
 
   submitPlan() {
     console.log("Submitting plan!");
-    console.log(this._selectedPlan);
+    this._httpService.createPlan(this._selectedPlan).then(x => {
+      console.log("Everything went fine!");
+    });
   }
 }
