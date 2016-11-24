@@ -18,7 +18,7 @@ import { HttpService } from './http.service';
     providers: [HttpService]
 })
 export class AppComponent {
-  plans: string[];
+  plans: Exercise[];
   
   constructor(private httpService: HttpService) {}
 
