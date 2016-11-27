@@ -9,9 +9,12 @@ import { ExerciseViewComponent } from './exerciseView.component';
 import { PlanViewComponent } from './planView.component';
 import { CreateComponent } from './create.component';
 import { LoginComponent } from './login.component';
+import { SignupComponent } from './signup.component';
 
 const appRoutes: Routes = [
   { path: 'create', component: CreateComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: '', component: PlanViewComponent }
 ]
 
@@ -29,7 +32,8 @@ const appRoutes: Routes = [
     PlanViewComponent,
     CreateComponent,
     ExerciseViewComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   bootstrap: [ AppComponent ]
 })

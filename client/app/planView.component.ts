@@ -4,7 +4,6 @@ import { Exercise } from './exercise';
 @Component({
     selector: 'planView',
     template: `
-    <h1>Fitness planning!</h1>
     <select [(ngModel)]="selected1">
       <option *ngFor="let sp of selectedPlan" [ngValue]="sp">{{sp.name}}</option>
     </select>

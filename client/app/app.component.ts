@@ -10,6 +10,8 @@ import { HttpService } from './http.service';
       <nav>
         <a routerLink="/" routerLinkActive="active">View plans</a>
         <a routerLink="/create" routerLinkActive="active">Create plan</a>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+        <a routerLink="/signup" routerLinkActive="active">Signup</a>
         <a routerLink="/logout" routerLinkActive="active">Logout</a>
       </nav>
     </header>
@@ -25,6 +27,7 @@ export class AppComponent {
   getPlans(): void {
     this.httpService.getPlans().then(plans => this.plans = plans);
   }
+  
 
   ngOnInit(): void {
     //this.getPlans();
