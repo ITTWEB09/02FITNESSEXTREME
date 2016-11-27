@@ -37,7 +37,6 @@ export class SignupComponent {
         this.httpService.signup(this.username, this.password).subscribe(
             res => {
                 console.log(res.text());
-                //this.createCookie(this.token, 1);
             },
             err => console.log("An error occured : " + err)
         );

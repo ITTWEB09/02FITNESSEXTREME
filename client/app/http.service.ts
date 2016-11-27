@@ -11,6 +11,7 @@ export class HttpService {
     private plansUrl = 'api/workoutPlan';
     private loginUrl = 'auth';
     private signupUrl = '/api/saveUser';
+    private completePlanUrl = '/api/workoutPlan/complete/'
 
     constructor(private http: Http) {
 
@@ -36,9 +37,15 @@ export class HttpService {
         let options = new RequestOptions({ headers: headers });
         let bodyObj = JSON.stringify({"username": username, "password": password});
 
-        return this.http.post(this.signupUrl, bodyObj, options);
-        //console.log("Post signup complete");
-        
+        return this.http.post(this.signupUrl, bodyObj, options);        
+    }
+
+    completePlan(id: number) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let bodyObj = JSON.stringify({"id": id});
+
+        return this.http.put(this.completePlanUrl + id, bodyObj, options);
     }
 
     private extractData(res: Response) {
