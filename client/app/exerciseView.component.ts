@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
-import { Exercise } from './exercise';
+import { Plan } from './plan';
 
 @Component({
     selector: 'ex-view',
     template: `
-        <table>
+        <table *ngIf="plan != undefined">
             <tr>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Reps</th>
                 <th>Sets</th>
             </tr>
-            <tr *ngFor="let exercise of plan">
+            <tr *ngFor="let exercise of plan.exercises">
                 <td>{{exercise.name}}</td>
                 <td>{{exercise.desc}}</td>
                 <td>{{exercise.reps}}</td>
@@ -30,5 +30,5 @@ import { Exercise } from './exercise';
     `]
 })
 export class ExerciseViewComponent {
-    @Input() plan: [Exercise];
+    @Input() plan: Plan;
 }

@@ -14,18 +14,20 @@ export class HttpService {
     private loginUrl = 'auth';
     private tokenUrl = 'auth_token';
     private createUrl = 'api/workoutPlan';
-    private signupUrl = '/api/saveUser';
-    private completePlanUrl = '/api/workoutPlan/complete/'
+    private signupUrl = 'api/saveUser';
+    private completePlanUrl = 'api/workoutPlan/complete/'
+    private specificPlanUrl = 'api/workoutPlan/'
 
     constructor(private http: Http) {
 
     }
 
-    getPlans() : Promise<string[]> { 
+    getPlans(): Observable<Response> { 
         return this.http.get(this.plansUrl)
-            .toPromise()
-            .then(response => response.json().data as string[])
-            .catch(this.handleError);
+    }
+
+    getPlanById(id: string): Observable<Response> { 
+        return this.http.get(this.specificPlanUrl + id)
     }
 
     doLogin(username: string, password: string): Observable<Response> {
@@ -44,12 +46,11 @@ export class HttpService {
         return this.http.post(this.signupUrl, bodyObj, options);        
     }
 
-    completePlan(id: number) {
+    completePlan(id: string) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        let bodyObj = JSON.stringify({"id": id});
 
-        return this.http.put(this.completePlanUrl + id, bodyObj, options);
+        return this.http.put(this.completePlanUrl + id, null, options);
     }
 
     private extractData(res: Response) {

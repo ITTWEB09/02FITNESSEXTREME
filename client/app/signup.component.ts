@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpService } from './http.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'Signup',
@@ -24,7 +25,7 @@ import { HttpService } from './http.service';
     providers: [HttpService]
 })
 export class SignupComponent {
-    constructor(private httpService: HttpService) {}
+    constructor(private httpService: HttpService, private _router: Router) {}
     username: string;
     password: string;
 
@@ -36,7 +37,7 @@ export class SignupComponent {
 
         this.httpService.signup(this.username, this.password).subscribe(
             res => {
-                console.log(res.text());
+                this._router.navigateByUrl('/login');
             },
             err => console.log("An error occured : " + err)
         );

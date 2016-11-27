@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Exercise } from './exercise';
 import { HttpService } from './http.service'
@@ -87,7 +88,7 @@ import { Plan } from './plan';
     `]
 })
 export class CreateComponent {
-  private _selectedPlan: Exercise[] = [];
+  private _selectedPlan: Plan;
 
   private _exForm = this._fb.group({
     name: ['', Validators.required],
@@ -100,23 +101,26 @@ export class CreateComponent {
     planName: ['', Validators.required]
   });
 
-  constructor(private _fb: FormBuilder, private _httpService: HttpService) {}
+  constructor(private _fb: FormBuilder, private _httpService: HttpService, private _router: Router) {
+    this._selectedPlan = new Plan();
+    this._selectedPlan.exercises = [];
+  }
 
   addExercise() {
     console.log("Adding exercise to plan!");
-    this._selectedPlan.push(this._exForm.value);
+    this._selectedPlan.exercises.push(this._exForm.value);
   }
 
   submitPlan() {
     console.log("Submitting plan!");
 
     let newPlan = new Plan();
-    newPlan.exercises = this._selectedPlan;
+    newPlan.exercises = this._selectedPlan.exercises;
     newPlan.completed = false;
     newPlan.name = this._opForm.controls['planName'].value;
 
     this._httpService.createPlan(newPlan).subscribe(res => {
-      console.log("Everything went fine!");
+      this._router.navigateByUrl('/');
     });
   }
 }

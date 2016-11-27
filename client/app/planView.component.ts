@@ -1,56 +1,87 @@
 import { Component } from '@angular/core';
-import { Exercise } from './exercise';
+import { Plan } from './plan';
 import { HttpService } from './http.service';
 
 @Component({
     selector: 'planView',
     template: `
-    <select [(ngModel)]="selected1">
-      <option *ngFor="let sp of selectedPlan" [ngValue]="sp">{{sp.name}}</option>
+    <select [(ngModel)]="_selectedCurrentPlan" (change)="onCurrentChange()">
+      <option *ngFor="let sp of _currentPlans" [ngValue]="sp">{{sp.name}}</option>
     </select>
-    <select [(ngModel)]="selected2">
-      <option *ngFor="let sp of selectedPastPlan" [ngValue]="sp">{{sp.name}}</option>
+    <select [(ngModel)]="_selectedCompletePlan" (change)="onCompleteChange()">
+      <option *ngFor="let sp of _completedPlans" [ngValue]="sp">{{sp.name}}</option>
     </select>
     <button type="button" (click)="logExercise()">
       Log exercise
     </button>
-    <ex-view [plan]="_selectedPlan"></ex-view>
+    <ex-view [plan]="_planToView"></ex-view>
     `,
     providers: [HttpService]
 })
 export class PlanViewComponent {
-    constructor(private httpService: HttpService) {}
-  private _selectedPlan: [Exercise] = [
-        { name: "Test1", desc: "Test1", reps: 5, sets:5 },
-        { name: "Test2", desc: "Test2", reps: 5, sets:5 }
-    ]
-    private selectedPastPlan: [Exercise] = [
-        { name: "Test1", desc: "Test1", reps: 5, sets:5 },
-        { name: "Test2", desc: "Test2", reps: 5, sets:5 }
-    ]
+    private _currentPlans: Plan[] = []; 
+    private _completedPlans: Plan[] = [];
+    private _selectedCurrentPlan: Plan;
+    private _selectedCompletePlan: Plan;
+    private _planToView: Plan;
 
+    constructor(private _httpService: HttpService) { }
+  
     logExercise(){
-      
-      //Need id - got it???
-       this.httpService.completePlan(this.selected1).subscribe(
+      console.log(this._selectedCurrentPlan);
+       this._httpService.completePlan(this._selectedCurrentPlan._id).subscribe(
             res => {
-                console.log(res.text());
-                //Add to past
- 
-
-                this.selectedPastPlan.push[this.selected1];
-                //Remove from present
-                this.selectedPlan.splice(this.selected1,1);
-                
-    console.log("Working as intended??: " + event);
+                this._completedPlans.push(this._selectedCurrentPlan);
+                this._currentPlans.splice(this._currentPlans.indexOf(this._selectedCurrentPlan), 1);
             },
             err => console.log("An error occured : " + err)
         );
     }
-    
-     private _plans: string[] = [];
 
   getPlans(): void {
-    this._httpService.getPlans().then(plans => this._plans = plans);
+    this._httpService.getPlans().subscribe(
+       res => {
+                var allPlans = res.json();
+
+                allPlans.forEach(element => {
+                    if(element.completed) {
+                        this._completedPlans.push(element);
+                    } else {
+                      this._currentPlans.push(element);
+                    }
+                });
+            },
+            err => console.log("An error occured : " + err)
+        );
   }
+
+  getPlanById(id: string, callback: Function) {
+    this._httpService.getPlanById(id).subscribe(
+       res => {
+                callback(res.json());
+            },
+            err => console.log("An error occured : " + err)
+        );
+  }
+  onCurrentChange(): void {
+    this.getPlanById(this._selectedCurrentPlan._id, plan => {
+      if(plan) {
+        this._planToView = plan;
+      } 
+    });
+    this._selectedCompletePlan = null;
+  }
+
+  onCompleteChange(): void {
+    this.getPlanById(this._selectedCompletePlan._id, plan => {
+      if(plan) {
+        this._planToView = plan;
+      } 
+    });
+    this._selectedCurrentPlan = null;
+  }
+
+  ngOnInit() {
+        this.getPlans();
+    }
 }
