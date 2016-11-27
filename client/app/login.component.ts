@@ -8,11 +8,11 @@ import { HttpService } from './http.service';
     <form>
         <div>
             <label>Username:</label>
-            <input type="text" id="username" [ngModel]="username"></input>
+            <input type="text" id="username" [ngModel]="username"/>
         </div>
         <div>
             <label>Password:</label>
-            <input type="text" id="password" [ngModel]="password"></input>
+            <input type="text" id="password" [ngModel]="password"/>
         </div>
         <div>
             <button type="button" (click)="login()">
@@ -32,7 +32,7 @@ export class LoginComponent {
     errorMessage: any;
 
     login(username, password) {
-        if(!name || !password) {
+        if(!username || !password) {
             return;
         }
         this.httpService.doLogin(username, password)

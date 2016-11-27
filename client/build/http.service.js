@@ -9,21 +9,61 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
+require('rxjs/add/operator/catch');
 var HttpService = (function () {
-    function HttpService() {
+    function HttpService(http) {
+        this.http = http;
+        this.plansUrl = 'app/plans';
+        this.loginUrl = 'app/auth';
+        this.createUrl = 'api/workoutPlan';
     }
     HttpService.prototype.getPlans = function () {
-        return Promise.resolve(["plan1", "plan2"]);
+        return this.http.get(this.plansUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    HttpService.prototype.doLogin = function (username, password) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.loginUrl, { "username": username, "password": password }, options)
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    HttpService.prototype.extractData = function (res) {
+        var body = res.json();
+        return body.data || {};
+    };
+    HttpService.prototype.handleError = function (error) {
+        // In a real world app, we might use a remote logging infrastructure
+        var errMsg;
+        if (error instanceof http_1.Response) {
+            var body = error.json() || '';
+            var err = body.error || JSON.stringify(body);
+            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+        }
+        else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Promise.reject(errMsg);
     };
     HttpService.prototype.createPlan = function (plan) {
+        var _this = this;
         return new Promise(function (resolve, reject) {
-            console.log(plan);
-            resolve(true);
+            var headers = new http_1.Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.bG9sbWFu.DKioyojgweMoeUaKLbz4eMR7bjh_uzMDkCEYUjy9XGw');
+            var options = new http_1.RequestOptions({ headers: headers });
+            _this.http.post(_this.createUrl, JSON.stringify(plan), options).toPromise().then(function () { return resolve(true); });
         });
     };
     HttpService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], HttpService);
     return HttpService;
 }());

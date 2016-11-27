@@ -74,8 +74,7 @@ import { HttpService } from './http.service'
     input.ng-invalid, textarea.ng-invalid {
       border: 1px solid red;
     }
-    `],
-    providers: [HttpService]
+    `]
 })
 export class CreateComponent {
   private _selectedPlan: Exercise[] = [];

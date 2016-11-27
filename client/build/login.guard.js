@@ -9,17 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var http_service_1 = require('./http.service');
+var LoginGuard = (function () {
+    function LoginGuard(httpService) {
+        this.httpService = httpService;
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            template: "\n    <h1>Fitness planning!</h1>\n    <header>\n      <nav>\n        <a routerLink=\"/\" routerLinkActive=\"active\">View plans</a>\n        <a routerLink=\"/create\" routerLinkActive=\"active\">Create plan</a>\n        <a routerLink=\"/logout\" routerLinkActive=\"active\">Logout</a>\n      </nav>\n    </header>\n    <router-outlet></router-outlet>\n    "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    LoginGuard.prototype.canActivate = function () {
+        return true;
+    };
+    LoginGuard = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_service_1.HttpService])
+    ], LoginGuard);
+    return LoginGuard;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.LoginGuard = LoginGuard;
+//# sourceMappingURL=login.guard.js.map

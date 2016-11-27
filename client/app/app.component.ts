@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Exercise } from './exercise';
-import { HttpService } from './http.service';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'my-app',
@@ -14,19 +12,6 @@ import { HttpService } from './http.service';
       </nav>
     </header>
     <router-outlet></router-outlet>
-    `,
-    providers: [HttpService]
+    `
 })
-export class AppComponent {
-  plans: Exercise[];
-  
-  constructor(private httpService: HttpService) {}
-
-  getPlans(): void {
-    this.httpService.getPlans().then(plans => this.plans = plans);
-  }
-
-  ngOnInit(): void {
-    //this.getPlans();
-  }
-}
+export class AppComponent {}

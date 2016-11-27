@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Exercise } from './exercise';
+import { HttpService } from './http.service';
 
 @Component({
     selector: 'planView',
@@ -14,11 +15,11 @@ import { Exercise } from './exercise';
     <button type="button" (click)="clicked()">
       Log exercise
     </button>
-    <ex-view></ex-view>
+    <ex-view [plan]="_selectedPlan"></ex-view>
     `
 })
 export class PlanViewComponent {
-  public selectedPlan: [Exercise] = [
+  private _selectedPlan: [Exercise] = [
     { name: "Test1", desc: "Test1", reps: 5, sets:5 },
     { name: "Test2", desc: "Test2", reps: 5, sets:5 }
   ]
@@ -29,7 +30,15 @@ export class PlanViewComponent {
   public selected1: string;
   public selected2: string;
 
+  private _plans: string[] = [];
+
+  constructor(private _httpService: HttpService) {}
+
+  getPlans(): void {
+    this._httpService.getPlans().then(plans => this._plans = plans);
+  }
+
   clicked(){
-    console.log("Working as intended??: " + event);
+    console.log("Working as intended?");
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Http, Response} from '@angular/http';
 import { Exercise } from './exercise';
-
+import { Plan } from './plan';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
@@ -10,15 +10,16 @@ import 'rxjs/add/operator/catch';
 export class HttpService {
     private plansUrl = 'app/plans';
     private loginUrl = 'app/auth';
+    private createUrl = 'api/workoutPlan'
 
     constructor(private http: Http) {
 
     }
 
-    getPlans() : Promise<Exercise[]> { 
+    getPlans() : Promise<string[]> { 
         return this.http.get(this.plansUrl)
             .toPromise()
-            .then(response => response.json().data as Exercise[])
+            .then(response => response.json().data as string[])
             .catch(this.handleError);
     }
 
@@ -51,10 +52,17 @@ export class HttpService {
         return Promise.reject(errMsg);
     }
 	
-	createPlan(plan : Exercise[]) : Promise<boolean> {
+	createPlan(plan : Plan) : Promise<boolean> {
         return new Promise((resolve, reject) => {
-            console.log(plan);
-            resolve(true);
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.bG9sbWFu.DKioyojgweMoeUaKLbz4eMR7bjh_uzMDkCEYUjy9XGw');
+
+            let options = new RequestOptions({ headers: headers });
+
+            this.http.post(this.createUrl, JSON.stringify(plan), options).toPromise().then(() => resolve(true));
         });
+
+        
     }
 }

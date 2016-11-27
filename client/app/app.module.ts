@@ -1,18 +1,20 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpModule }    from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import { ExerciseViewComponent } from './exerciseView.component';
 import { PlanViewComponent } from './planView.component';
 import { CreateComponent } from './create.component';
 import { LoginComponent } from './login.component';
+import { HttpService } from './http.service';
+import { LoginGuard } from './login.guard';
 
 const appRoutes: Routes = [
-  { path: 'create', component: CreateComponent },
-  { path: '', component: PlanViewComponent }
+  { path: 'create', component: CreateComponent, canActivate: [LoginGuard] },
+  { path: '', component: PlanViewComponent, canActivate: [LoginGuard] }
 ]
 
 @NgModule({
@@ -30,6 +32,10 @@ const appRoutes: Routes = [
     CreateComponent,
     ExerciseViewComponent,
     LoginComponent
+  ],
+  providers: [
+    HttpService,
+    LoginGuard
   ],
   bootstrap: [ AppComponent ]
 })
