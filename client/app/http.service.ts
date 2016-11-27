@@ -5,12 +5,14 @@ import { Plan } from './plan';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpService {
-    private plansUrl = 'app/plans';
-    private loginUrl = 'app/auth';
-    private createUrl = 'api/workoutPlan'
+    private plansUrl = 'api/workoutPlan';
+    private loginUrl = 'auth';
+    private createUrl = 'api/workoutPlan';
+    private signupUrl = '/api/saveUser';
 
     constructor(private http: Http) {
 
@@ -23,14 +25,22 @@ export class HttpService {
             .catch(this.handleError);
     }
 
-    doLogin(username: string, password: string): Promise<any> {
+    doLogin(username: string, password: string): Observable<Response> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
+        let bodyObj = JSON.stringify({"username": username, "password": password});
 
-        return this.http.post(this.loginUrl, {"username": username, "password": password}, options)
-            .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
+        return this.http.post(this.loginUrl, bodyObj, options);
+    }
+    
+    signup(username: string, password: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let bodyObj = JSON.stringify({"username": username, "password": password});
+
+        return this.http.post(this.signupUrl, bodyObj, options);
+        //console.log("Post signup complete");
+        
     }
 
     private extractData(res: Response) {

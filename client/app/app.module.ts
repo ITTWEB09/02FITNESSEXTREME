@@ -10,10 +10,13 @@ import { PlanViewComponent } from './planView.component';
 import { CreateComponent } from './create.component';
 import { LoginComponent } from './login.component';
 import { HttpService } from './http.service';
+import { SignupComponent } from './signup.component';
 import { LoginGuard } from './login.guard';
 
 const appRoutes: Routes = [
   { path: 'create', component: CreateComponent, canActivate: [LoginGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: '', component: PlanViewComponent, canActivate: [LoginGuard] }
 ]
 
@@ -31,8 +34,8 @@ const appRoutes: Routes = [
     PlanViewComponent,
     CreateComponent,
     ExerciseViewComponent,
-    LoginComponent
-  ],
+    LoginComponent,
+    SignupComponent
   providers: [
     HttpService,
     LoginGuard
