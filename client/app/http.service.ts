@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Http, Response} from '@angular/http';
 import { Exercise } from './exercise';
-import { Observable } from 'rxjs/Observable';
+import { Plan } from './plan';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpService {
     private plansUrl = 'api/workoutPlan';
     private loginUrl = 'auth';
+    private tokenUrl = 'auth_token';
+    private createUrl = 'api/workoutPlan';
     private signupUrl = '/api/saveUser';
     private completePlanUrl = '/api/workoutPlan/complete/'
 
@@ -17,10 +21,10 @@ export class HttpService {
 
     }
 
-    getPlans() : Promise<Exercise[]> { 
+    getPlans() : Promise<string[]> { 
         return this.http.get(this.plansUrl)
             .toPromise()
-            .then(response => response.json().data as Exercise[])
+            .then(response => response.json().data as string[])
             .catch(this.handleError);
     }
 
@@ -66,11 +70,30 @@ export class HttpService {
         console.error(errMsg);
         return Promise.reject(errMsg);
     }
-	
-	createPlan(plan : Exercise[]) : Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            console.log(plan);
-            resolve(true);
+    
+	createPlan(plan : Plan) : Observable<Response> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.bG9sbWFu.DKioyojgweMoeUaKLbz4eMR7bjh_uzMDkCEYUjy9XGw');
+
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.createUrl, JSON.stringify(plan), options);
+    }
+
+    checkLogin() : Observable<boolean> {
+        if(document.cookie.indexOf('myToken') == -1) {
+            return Observable.create(obs => {
+                obs.next(false);
+                obs.complete();
+            });
+        }
+
+        return this.http.post(this.tokenUrl, null).flatMap(res => {
+            return Observable.create(obs => {
+                obs.next(res.ok);
+                obs.complete();
+            });
         });
     }
 }

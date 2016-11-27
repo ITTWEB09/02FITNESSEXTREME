@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpService } from './http.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'Login',
@@ -24,7 +25,7 @@ import { HttpService } from './http.service';
     providers: [HttpService]
 })
 export class LoginComponent {
-    constructor(private httpService: HttpService) {}
+    constructor(private httpService: HttpService, private _router: Router) {}
     username: string;
     password: string;
     token: string;
@@ -39,7 +40,7 @@ export class LoginComponent {
             res => {
                 this.token = res.text();
                 this.createCookie(this.token, 1);
-                console.log("login successful");
+                this._router.navigateByUrl('/');
             },
             err => console.log("An error occured : " + err)
         );

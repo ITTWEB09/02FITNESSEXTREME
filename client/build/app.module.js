@@ -12,13 +12,22 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
+var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var exerciseView_component_1 = require('./exerciseView.component');
 var planView_component_1 = require('./planView.component');
 var create_component_1 = require('./create.component');
+var login_component_1 = require('./login.component');
+var http_service_1 = require('./http.service');
+var signup_component_1 = require('./signup.component');
+var login_guard_1 = require('./login.guard');
+var logout_component_1 = require('./logout.component');
 var appRoutes = [
-    { path: 'create', component: create_component_1.CreateComponent },
-    { path: '', component: planView_component_1.PlanViewComponent }
+    { path: 'create', component: create_component_1.CreateComponent, canActivate: [login_guard_1.LoginGuard] },
+    { path: '', component: planView_component_1.PlanViewComponent, canActivate: [login_guard_1.LoginGuard] },
+    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'signup', component: signup_component_1.SignupComponent },
+    { path: 'logout', component: logout_component_1.LogoutComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -28,15 +37,23 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule,
-                router_1.RouterModule.forRoot(appRoutes)
+                router_1.RouterModule.forRoot(appRoutes),
+                http_1.HttpModule,
+                forms_1.ReactiveFormsModule
             ],
             declarations: [
                 app_component_1.AppComponent,
                 exerciseView_component_1.ExerciseViewComponent,
                 planView_component_1.PlanViewComponent,
                 create_component_1.CreateComponent,
-                exerciseView_component_1.ExerciseViewComponent
+                exerciseView_component_1.ExerciseViewComponent,
+                login_component_1.LoginComponent,
+                signup_component_1.SignupComponent,
+                logout_component_1.LogoutComponent
+            ],
+            providers: [
+                http_service_1.HttpService,
+                login_guard_1.LoginGuard
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

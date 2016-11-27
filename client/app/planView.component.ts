@@ -14,20 +14,17 @@ import { HttpService } from './http.service';
     <button type="button" (click)="logExercise()">
       Log exercise
     </button>
-    <ex-view></ex-view>
+    <ex-view [plan]="_selectedPlan"></ex-view>
     `,
     providers: [HttpService]
 })
 export class PlanViewComponent {
     constructor(private httpService: HttpService) {}
-    public selected1: number;
-    public selected2: number;
-
-    public selectedPlan: [Exercise] = [
+  private _selectedPlan: [Exercise] = [
         { name: "Test1", desc: "Test1", reps: 5, sets:5 },
         { name: "Test2", desc: "Test2", reps: 5, sets:5 }
     ]
-    public selectedPastPlan: [Exercise] = [
+    private selectedPastPlan: [Exercise] = [
         { name: "Test1", desc: "Test1", reps: 5, sets:5 },
         { name: "Test2", desc: "Test2", reps: 5, sets:5 }
     ]
@@ -39,13 +36,21 @@ export class PlanViewComponent {
             res => {
                 console.log(res.text());
                 //Add to past
+ 
+
                 this.selectedPastPlan.push[this.selected1];
                 //Remove from present
                 this.selectedPlan.splice(this.selected1,1);
                 
-                console.log("Plan updated");
+    console.log("Working as intended??: " + event);
             },
             err => console.log("An error occured : " + err)
         );
     }
+    
+     private _plans: string[] = [];
+
+  getPlans(): void {
+    this._httpService.getPlans().then(plans => this._plans = plans);
+  }
 }
