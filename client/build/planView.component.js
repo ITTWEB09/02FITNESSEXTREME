@@ -33,7 +33,7 @@ var PlanViewComponent = (function () {
     PlanViewComponent = __decorate([
         core_1.Component({
             selector: 'planView',
-            template: "\n    <h1>Fitness planning!</h1>\n    <select [(ngModel)]=\"selected1\">\n      <option *ngFor=\"let sp of selectedPlan\" [ngValue]=\"sp\">{{sp.name}}</option>\n    </select>\n    <select [(ngModel)]=\"selected2\">\n      <option *ngFor=\"let sp of selectedPastPlan\" [ngValue]=\"sp\">{{sp.name}}</option>\n    </select>\n    <button type=\"button\" (click)=\"clicked()\">\n      Log exercise\n    </button>\n    <ex-view [plan]=\"_selectedPlan\"></ex-view>\n    "
+            template: "\n    <select [(ngModel)]=\"selected1\">\n      <option *ngFor=\"let sp of selectedPlan\" [ngValue]=\"sp\">{{sp.name}}</option>\n    </select>\n    <select [(ngModel)]=\"selected2\">\n      <option *ngFor=\"let sp of selectedPastPlan\" [ngValue]=\"sp\">{{sp.name}}</option>\n    </select>\n    <button type=\"button\" (click)=\"clicked()\">\n      Log exercise\n    </button>\n    <ex-view [plan]=\"_selectedPlan\"></ex-view>\n    "
         }), 
         __metadata('design:paramtypes', [http_service_1.HttpService])
     ], PlanViewComponent);

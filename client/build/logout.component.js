@@ -10,26 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var http_service_1 = require('./http.service');
-require('rxjs/add/operator/do');
-var LoginGuard = (function () {
-    function LoginGuard(_httpService, _router) {
-        this._httpService = _httpService;
+var LogoutComponent = (function () {
+    function LogoutComponent(_router) {
         this._router = _router;
     }
-    LoginGuard.prototype.canActivate = function () {
-        var _this = this;
-        return this._httpService.checkLogin().do(function (succ) {
-            if (!succ) {
-                _this._router.navigateByUrl('/login');
-            }
-        });
+    // Source: http://stackoverflow.com/questions/2144386/javascript-delete-cookie
+    LogoutComponent.prototype.deleteCookie = function () {
+        var date = new Date();
+        date.setTime(date.getTime() - 1);
+        var expires = "; expires=" + date.toUTCString();
+        document.cookie = "myToken=" + expires + "; path=/";
     };
-    LoginGuard = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_service_1.HttpService, router_1.Router])
-    ], LoginGuard);
-    return LoginGuard;
+    LogoutComponent.prototype.ngOnInit = function () {
+        this.deleteCookie();
+        this._router.navigateByUrl('/');
+    };
+    LogoutComponent = __decorate([
+        core_1.Component({
+            selector: 'Login',
+            template: '<p>Logging out...</p>'
+        }), 
+        __metadata('design:paramtypes', [router_1.Router])
+    ], LogoutComponent);
+    return LogoutComponent;
 }());
-exports.LoginGuard = LoginGuard;
-//# sourceMappingURL=login.guard.js.map
+exports.LogoutComponent = LogoutComponent;
+//# sourceMappingURL=logout.component.js.map

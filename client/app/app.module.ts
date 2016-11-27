@@ -12,12 +12,14 @@ import { LoginComponent } from './login.component';
 import { HttpService } from './http.service';
 import { SignupComponent } from './signup.component';
 import { LoginGuard } from './login.guard';
+import { LogoutComponent } from './logout.component';
 
 const appRoutes: Routes = [
   { path: 'create', component: CreateComponent, canActivate: [LoginGuard] },
+  { path: '', component: PlanViewComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: '', component: PlanViewComponent, canActivate: [LoginGuard] }
+  { path: 'logout', component: LogoutComponent }
 ]
 
 @NgModule({
@@ -35,7 +37,9 @@ const appRoutes: Routes = [
     CreateComponent,
     ExerciseViewComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogoutComponent
+  ],
   providers: [
     HttpService,
     LoginGuard

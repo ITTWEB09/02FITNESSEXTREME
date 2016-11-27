@@ -5,12 +5,14 @@ import { Plan } from './plan';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpService {
     private plansUrl = 'api/workoutPlan';
     private loginUrl = 'auth';
+    private tokenUrl = 'auth_token';
     private createUrl = 'api/workoutPlan';
     private signupUrl = '/api/saveUser';
 
@@ -61,18 +63,30 @@ export class HttpService {
         console.error(errMsg);
         return Promise.reject(errMsg);
     }
-	
-	createPlan(plan : Plan) : Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.bG9sbWFu.DKioyojgweMoeUaKLbz4eMR7bjh_uzMDkCEYUjy9XGw');
+    
+	createPlan(plan : Plan) : Observable<Response> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.bG9sbWFu.DKioyojgweMoeUaKLbz4eMR7bjh_uzMDkCEYUjy9XGw');
 
-            let options = new RequestOptions({ headers: headers });
+        let options = new RequestOptions({ headers: headers });
 
-            this.http.post(this.createUrl, JSON.stringify(plan), options).toPromise().then(() => resolve(true));
+        return this.http.post(this.createUrl, JSON.stringify(plan), options);
+    }
+
+    checkLogin() : Observable<boolean> {
+        if(document.cookie.indexOf('myToken') == -1) {
+            return Observable.create(obs => {
+                obs.next(false);
+                obs.complete();
+            });
+        }
+
+        return this.http.post(this.tokenUrl, null).flatMap(res => {
+            return Observable.create(obs => {
+                obs.next(res.ok);
+                obs.complete();
+            });
         });
-
-        
     }
 }

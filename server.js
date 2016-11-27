@@ -10,7 +10,7 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 app.set('secret', config.secret);
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));    

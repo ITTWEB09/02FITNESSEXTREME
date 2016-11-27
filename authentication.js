@@ -25,13 +25,17 @@ module.exports = function(app){
     app.use(passport.initialize());  
 
     app.post('/auth_token', function(req, res) {
-        jwt.verify(req.body, app.get('secret'), function(err, decoded) {
-            if(err) {
-                res.sendStatus(403);
-            } else {
-                res.sendStatus(200);
-            }
-        });
+        if(req.cookies) {
+            jwt.verify(req.cookies.myToken, app.get('secret'), function(err, decoded) {
+                if(err) {
+                    res.sendStatus(403);
+                } else {
+                    res.sendStatus(200);
+                }
+            });
+        } else {
+            res.sendStatus(403);
+        }
     });
 
     app.post('/auth', passport.authenticate('local', {

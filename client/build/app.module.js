@@ -19,10 +19,15 @@ var planView_component_1 = require('./planView.component');
 var create_component_1 = require('./create.component');
 var login_component_1 = require('./login.component');
 var http_service_1 = require('./http.service');
+var signup_component_1 = require('./signup.component');
 var login_guard_1 = require('./login.guard');
+var logout_component_1 = require('./logout.component');
 var appRoutes = [
     { path: 'create', component: create_component_1.CreateComponent, canActivate: [login_guard_1.LoginGuard] },
-    { path: '', component: planView_component_1.PlanViewComponent, canActivate: [login_guard_1.LoginGuard] }
+    { path: '', component: planView_component_1.PlanViewComponent, canActivate: [login_guard_1.LoginGuard] },
+    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'signup', component: signup_component_1.SignupComponent },
+    { path: 'logout', component: logout_component_1.LogoutComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -42,7 +47,9 @@ var AppModule = (function () {
                 planView_component_1.PlanViewComponent,
                 create_component_1.CreateComponent,
                 exerciseView_component_1.ExerciseViewComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                signup_component_1.SignupComponent,
+                logout_component_1.LogoutComponent
             ],
             providers: [
                 http_service_1.HttpService,

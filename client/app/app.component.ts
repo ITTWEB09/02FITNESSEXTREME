@@ -15,8 +15,6 @@ import { Component } from '@angular/core';
     </header>
     <router-outlet></router-outlet>
     `
-    `,
-    providers: [HttpService]
 })
 
 export class AppComponent {

@@ -10,25 +10,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_service_1 = require('./http.service');
+var router_1 = require('@angular/router');
 var LoginComponent = (function () {
-    function LoginComponent(httpService) {
+    function LoginComponent(httpService, _router) {
         this.httpService = httpService;
+        this._router = _router;
     }
-    LoginComponent.prototype.login = function (username, password) {
+    LoginComponent.prototype.login = function () {
         var _this = this;
-        if (!username || !password) {
+        if (!this.username || !this.password) {
+            console.log("Username or password not set!");
             return;
         }
-        this.httpService.doLogin(username, password)
-            .then(function (token) { return _this.token = token; }, function (error) { return _this.errorMessage = error; });
+        this.httpService.doLogin(this.username, this.password).subscribe(function (res) {
+            _this.token = res.text();
+            _this.createCookie(_this.token, 1);
+            _this._router.navigateByUrl('/');
+        }, function (err) { return console.log("An error occured : " + err); });
+    };
+    LoginComponent.prototype.createCookie = function (value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = "myToken=" + value + expires + "; path=/";
     };
     LoginComponent = __decorate([
         core_1.Component({
             selector: 'Login',
-            template: "\n    <h2> Login </h2>\n    <form>\n        <div>\n            <label>Username:</label>\n            <input type=\"text\" id=\"username\" [ngModel]=\"username\"/>\n        </div>\n        <div>\n            <label>Password:</label>\n            <input type=\"text\" id=\"password\" [ngModel]=\"password\"/>\n        </div>\n        <div>\n            <button type=\"button\" (click)=\"login()\">\n            Login\n            </button>\n        </div>\n    </form>\n    ",
+            template: "\n    <h2> Login </h2>\n    \n        <div>\n            <label>Username:</label>\n            <input type=\"text\" id=\"username\" [(ngModel)] = \"username\"/>\n        </div>\n        <div>\n            <label>Password:</label>\n            <input type=\"text\" id=\"password\" [(ngModel)] = \"password\"/>\n        </div>\n        <div>\n            <button type=\"button\" (click)=\"login()\">\n            Login\n            </button>\n        </div>\n    \n    ",
             providers: [http_service_1.HttpService]
         }), 
-        __metadata('design:paramtypes', [http_service_1.HttpService])
+        __metadata('design:paramtypes', [http_service_1.HttpService, router_1.Router])
     ], LoginComponent);
     return LoginComponent;
 }());
